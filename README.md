@@ -30,6 +30,14 @@ After installing the necessary libraries, you can run the application by executi
    ```bash
    python game_rock_paper_scissors.py
 
+## Images
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/52a747b6-7cb8-421d-8660-ad7f59963ca9" alt="First Image" width="31%" style="margin-right: 10px;"/>
+  <img src="https://github.com/user-attachments/assets/cfa104a1-18fd-4c5b-b0f9-1d177898dedb" alt="Second Image" width="31%" style="margin-right: 10px;"/>
+  <img src="https://github.com/user-attachments/assets/5f61bf8c-3c21-46ae-8577-32de301cfdf9" alt="Third Image" width="31%"/>
+</p>
+
 ## Usage
 
 - **Start the Game**: Run the script and position your hands within the webcam's field of view.
