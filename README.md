@@ -1,34 +1,52 @@
-# Rock-Paper-Scissors Hand Gesture Game
+# Rock Paper Scissors (Hand Tracking Edition)
 
-## Overview
-This project is a Rock-Paper-Scissors game that utilizes computer vision techniques to interpret hand gestures as game moves. Built using OpenCV and a custom hand tracking module, the application can determine the outcome of the game played with hand gestures captured via webcam.
+Play rock paper scissors against a friend using nothing but your webcam and your hands. No keyboard, no controller, just gestures.
 
-## Features
-- **Hand Gesture Recognition**: Uses OpenCV and the MediaPipe library to recognize hand gestures in real-time.
-- **Game Logic Implementation**: Determines the winner of Rock-Paper-Scissors based on the recognized gestures.
-- **Real-time Interaction**: Players can see the game result instantly on the screen after their gestures are recognized.
+## What it does
 
-## Technologies Used
-- **Python**: The core programming language used.
-- **OpenCV (cv2)**: For image processing and capturing video input from a webcam.
-- **MediaPipe**: Used for robust hand tracking and gesture recognition.
+Two people sit in front of one webcam, one on the left side of the frame and one on the right. The app tracks both hands using MediaPipe, figures out which gesture each person is making (rock, paper, or scissors), and decides the winner live on screen.
+
+There are two versions in this repo:
+
+* `game_rock_paper_scissors.py`, the original version. It opens a plain OpenCV window and prints the detected gestures and result directly onto the video feed.
+* `rps_gui.py`, a nicer version with an actual interface built in tkinter. It has a scoreboard, round counter, FPS display, and buttons to reset the score or quit.
+
+Both use the same hand tracking logic under the hood, defined in `hand_tracking_module.py`.
+
+## How gesture detection works
+
+MediaPipe gives you 21 landmark points per hand (fingertips, knuckles, etc). The code checks the position of each fingertip relative to its base joint to figure out which fingers are extended. All five fingers up means paper, only the index and middle fingers up means scissors, and everything curled in means rock. The GUI version also mirrors this logic but is a bit more robust about which side of the frame each hand is on.
+
+## Tech used
+
+* Python
+* OpenCV for capturing and displaying the webcam feed
+* MediaPipe for hand landmark detection
+* Tkinter and Pillow for the GUI version's interface
 
 ## Installation
 
-To run this application, you will need Python installed along with OpenCV and MediaPipe. Follow these steps to set up:
+You'll need Python installed. Then grab the dependencies:
 
-1. **Install Python**:
-   Ensure Python is installed on your system. You can download it from [python.org](https://www.python.org).
+```bash
+pip install opencv-python mediapipe pillow
+```
 
-2. **Install Required Libraries**:
-   Install OpenCV and MediaPipe using pip:
-   ```bash
-   pip install opencv-python mediapipe
-   
-3. **Running the Application**
-After installing the necessary libraries, you can run the application by executing the main Python script. Make sure your webcam is connected and permitted to be used by Python scripts.
-   ```bash
-   python game_rock_paper_scissors.py
+## Running it
+
+For the GUI version with the scoreboard:
+
+```bash
+python rps_gui.py
+```
+
+For the original, simpler version:
+
+```bash
+python game_rock_paper_scissors.py
+```
+
+Make sure your webcam is connected and both players can fit in frame, one on each side.
 
 ## Images
 
@@ -38,18 +56,6 @@ After installing the necessary libraries, you can run the application by executi
   <img src="https://github.com/user-attachments/assets/5f61bf8c-3c21-46ae-8577-32de301cfdf9" alt="Third Image" width="31%"/>
 </p>
 
-## Usage
-
-- **Start the Game**: Run the script and position your hands within the webcam's field of view.
-- **Make Your Gesture**: Use rock, paper, or scissors gestures. The system will recognize these gestures and display the corresponding move on the screen.
-- **Game Results**: After both players have made their moves, the game will determine and display the winner on the screen.
-
 ## Contributing
 
-Contributions are welcome, and here are some ways you can help improve the project:
-
-- **Enhance Gesture Recognition**: Improve the accuracy and efficiency of the hand tracking and gesture recognition.
-- **Add Features**: Introduce new functionalities like score tracking or support for multiple rounds.
-- **Improve Documentation**: Help make the project more accessible to new users by enhancing the existing documentation.
-
-To contribute, fork the repository, make your changes, and submit a pull request.
+If you want to help improve gesture accuracy, add best of three rounds, or clean up the detection logic, pull requests are welcome. Fork the repo, make your changes, and submit a PR.
